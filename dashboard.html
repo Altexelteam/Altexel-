@@ -1,0 +1,84 @@
+<html lang="az"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İstifadəçi Paneli</title>
+   <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f4;
+}
+
+.dashboard-container {
+    width: 350px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #ff3d00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d32f2f;
+}
+
+   </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Salam, <span id="username">Tunar</span>!</h1>
+        <p>Siz sistemə uğurla daxil oldunuz.</p>
+        <button id="logoutBtn">Çıxış</button>
+    </div>
+
+    <script>
+        // LocalStorage-dən istifadəçi məlumatını oxu
+        const currentUserEmail = localStorage.getItem("currentUser");
+
+        if (!currentUserEmail) {
+            alert("Zəhmət olmasa, əvvəlcə daxil olun.");
+            window.location.href = "hesab.html";
+        } else {
+            const userData = JSON.parse(localStorage.getItem(currentUserEmail));
+            document.getElementById("username").innerText = userData.username;
+        }
+
+        // Çıxış düyməsi funksiyası
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+            localStorage.removeItem("currentUser");
+            alert("Siz çıxış etdiniz!");
+            window.location.href = "hesab.html";
+        });
+    </script>
+
+
+</body></html>
